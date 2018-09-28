@@ -6,6 +6,8 @@ How do we manage a room of learners with different experience levels and learnin
 
 ## Our Solution
 
-Introducing "The Micro Pager".  Asking for help should be simple.  No Apps, No Logins, No Complex Questions.  Signal to the instructor instantly to slow down or speed up please.  Page a mentor with the click of an ACTUAL button.
+Introducing "The CL-Sig" - The Canada Learns Signaler.
+
+Asking for help should be simple.  No Apps, No Logins, No Complex Questions.  Signal to the instructor instantly to slow down or speed up please.  Page a mentor with the click of an ACTUAL button.
 
 We will leverage IoT technology to deliver a solution suitable for all age levels.

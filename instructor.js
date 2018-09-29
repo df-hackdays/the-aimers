@@ -9,6 +9,8 @@ let normal_count = 0
 let button_A_state = 0
 let button_B_state = 0
 let qamode = 0
+let max = 4
+
 radio.setGroup(1)
 serial.writeLine("started")
 
@@ -17,8 +19,8 @@ input.onButtonPressed(Button.A, () => {
     if (button_A_state == 0) {
         radio.sendNumber(101)
         button_A_state = 1
-		serial.writeLine("qastarted")
-		basic.showLeds(`
+        serial.writeLine("qastarted")
+        basic.showLeds(`
             . # # # .
             . . # . .
             . . # . .
@@ -28,13 +30,13 @@ input.onButtonPressed(Button.A, () => {
     } else {
         button_A_state = 0
         radio.sendNumber(100)
-		serial.writeLine("Results " + "A" + A_count + "B" + B_count + "C" + C_count + "D" + D_count)
+        serial.writeLine("Results " + "A" + A_count + "B" + B_count + "C" + C_count + "D" + D_count)
         // draw a graph with the A,B,C,D content
         A_count = 0
         B_count = 0
         C_count = 0
         D_count = 0
-		basic.showLeds(`
+        basic.showLeds(`
             . . . . .
             . . . . .
             . . . . .
@@ -47,45 +49,116 @@ radio.onDataPacketReceived(({ receivedNumber }) => {
     // Initial case
     if (receivedNumber == 9) {
         normal_count += 1
+
+        for(let i = 0; i<5; i++) {
+            led.unplot(i,0)
+            led.unplot(i, 2)
+            led.unplot(i, 4)
+        }
+
+        for(let i = 0; i<=normal_count; i++) {
+            if(normal_count == 5)
+                break;
+            led.plot(max-i,2)
+        }
     }
     // Slow
     if (receivedNumber == 10) {
         slow_count += 1
         normal_count += -1
+
+        for (let i = 0; i < 5; i++) {
+                led.unplot(i, 0)
+                led.unplot(i, 2)
+        }
+
+        for (let i = 0; i <= normal_count; i++) {
+            if (normal_count == 5)
+                break;
+            led.plot(max - i, 2)
+        }
+
+        for (let i = 0; i <= slow_count; i++) {
+            if (slow_count == 5)
+                break;
+            led.plot(max - i, 0)
+        }
+
+
+
+
+
+
+
     }
     // Fast
     if (receivedNumber == 12) {
         fast_count += 1
         slow_count += -1
+
+        for (let i = 0; i < 5; i++) {
+            led.unplot(i, 4)
+            led.unplot(i, 0)
+        }
+
+        for (let i = 0; i <= slow_count; i++) {
+            if (slow_count == 5)
+                break;
+            led.plot(max - i, 0)
+        }
+
+        for (let i = 0; i <= fast_count; i++) {
+            if (fast_count == 5)
+                break;
+            led.plot(max - i, 4)
+        }
     }
     // normal
     if (receivedNumber == 11) {
         normal_count += 1
         fast_count += -1
+
+        for (let i = 0; i < 5; i++) {
+            led.unplot(i, 4)
+            led.unplot(i, 2)
+        }
+
+        for (let i = 0; i <= fast_count; i++) {
+            if (fast_count == 5)
+                break;
+            led.plot(max - i, 4)
+        }
+
+        for (let i = 0; i <= normal_count; i++) {
+            if (normal_count == 5)
+                break;
+            led.plot(max - i, 2)
+        }
     }
     if (receivedNumber == 21) {
         A_count += 1
-		qamode = 1
+        qamode = 1
     }
     if (receivedNumber == 22) {
         B_count += 1
-		qamode = 1
+        qamode = 1
     }
     if (receivedNumber == 23) {
         C_count += 1
-		qamode = 1
+        qamode = 1
     }
     if (receivedNumber == 24) {
         D_count += 1
-		qamode = 1
+        qamode = 1
     }
-	
-	if(qamode == 0) {
-		num_to_show = fast_count - slow_count
-		basic.showNumber(num_to_show)
-		serial.writeLine("Pace " + num_to_show)
-	}
-	
-	qamode = 0
+
+    if (qamode == 0) {
+        num_to_show = fast_count - slow_count
+        basic.showNumber(num_to_show)
+        serial.writeLine("Pace " + num_to_show)
+    }
+
+    qamode = 0
 })
+
 

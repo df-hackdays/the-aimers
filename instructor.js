@@ -18,6 +18,10 @@ input.onButtonPressed(Button.A, () => {
         button_A_state = 0
         radio.sendNumber(100)
 		
+		serial.writeNumber(A_count)
+		serial.writeNumber(B_count)
+		serial.writeNumber(C_count)
+		serial.writeNumber(D_count)
 		// draw a graph with the A,B,C,D content
         A_count = 0
         B_count = 0

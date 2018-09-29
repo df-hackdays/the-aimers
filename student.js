@@ -25,11 +25,21 @@ input.onButtonPressed(Button.A, () => {
             radio.sendNumber(11)
         }
     }
+    if (qa_mode == 1) {
+    	
+    }
 })
 input.onButtonPressed(Button.B, () => {
     if (qa_mode == 0 && help_mode == 0) {
         help_mode = 1
         radio.sendNumber(911)
+        basic.showLeds(`
+            # # # # #
+            # # # # #
+            # # # # #
+            # # # # #
+            # # # # #
+            `)
     }
     if (qa_mode == 0 && help_mode == 1) {
         help_mode = 0

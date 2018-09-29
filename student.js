@@ -69,7 +69,7 @@ input.onButtonPressed(Button.B, () => {
     }
     if (qa_mode == 1 && help_mode == 0) {
         radio.sendNumber(answer_result)
-        answer_click = 1
+        answer_click = 0
         basic.showIcon(IconNames.Happy)
     }
 })
@@ -88,11 +88,13 @@ pace_click = 0
 pace_result = 0
 send_pace = 0
 radio.sendNumber(9)
+radio.setTransmitSerialNumber(true)
 basic.showIcon(IconNames.Happy)
 qa_mode = 0
 help_mode = 0
 answer_click = 0
 answer_result = 0
+serial.writeNumber(control.deviceSerialNumber())
 basic.forever(() => {
 	
 })

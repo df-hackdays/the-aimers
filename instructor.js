@@ -51,15 +51,15 @@ radio.onDataPacketReceived(({ receivedNumber }) => {
         normal_count += 1
 
         for(let i = 0; i<5; i++) {
-            led.unplot(i,0)
-            led.unplot(i, 2)
-            led.unplot(i, 4)
+            led.unplot(0,i)
+            led.unplot(2,i)
+            led.unplot(4,i)
         }
 
-        for(let i = 0; i<=normal_count; i++) {
+        for(let i = 0; i<normal_count; i++) {
             if(normal_count == 5)
                 break;
-            led.plot(max-i,2)
+            led.plot(2,max-i)
         }
     }
     // Slow
@@ -68,20 +68,20 @@ radio.onDataPacketReceived(({ receivedNumber }) => {
         normal_count += -1
 
         for (let i = 0; i < 5; i++) {
-                led.unplot(i, 0)
-                led.unplot(i, 2)
+                led.unplot(0,i)
+                led.unplot(4,i)
         }
 
-        for (let i = 0; i <= normal_count; i++) {
+        for (let i = 0; i < normal_count; i++) {
             if (normal_count == 5)
                 break;
-            led.plot(max - i, 2)
+            led.plot(4,max-i)
         }
 
-        for (let i = 0; i <= slow_count; i++) {
+        for (let i = 0; i < slow_count; i++) {
             if (slow_count == 5)
                 break;
-            led.plot(max - i, 0)
+            led.plot(0,max-i)
         }
 
 
@@ -97,20 +97,20 @@ radio.onDataPacketReceived(({ receivedNumber }) => {
         slow_count += -1
 
         for (let i = 0; i < 5; i++) {
-            led.unplot(i, 4)
-            led.unplot(i, 0)
+            led.unplot(2,i)
+            led.unplot(0,i)
         }
 
-        for (let i = 0; i <= slow_count; i++) {
+        for (let i = 0; i < slow_count; i++) {
             if (slow_count == 5)
                 break;
-            led.plot(max - i, 0)
+            led.plot(0,max-i)
         }
 
-        for (let i = 0; i <= fast_count; i++) {
+        for (let i = 0; i < fast_count; i++) {
             if (fast_count == 5)
                 break;
-            led.plot(max - i, 4)
+            led.plot(2,max-i)
         }
     }
     // normal
@@ -123,16 +123,16 @@ radio.onDataPacketReceived(({ receivedNumber }) => {
             led.unplot(i, 2)
         }
 
-        for (let i = 0; i <= fast_count; i++) {
+        for (let i = 0; i < fast_count; i++) {
             if (fast_count == 5)
                 break;
-            led.plot(max - i, 4)
+            led.plot(2,max-i)
         }
 
-        for (let i = 0; i <= normal_count; i++) {
+        for (let i = 0; i < normal_count; i++) {
             if (normal_count == 5)
                 break;
-            led.plot(max - i, 2)
+            led.plot(4,max-i)
         }
     }
     if (receivedNumber == 21) {
@@ -154,7 +154,6 @@ radio.onDataPacketReceived(({ receivedNumber }) => {
 
     if (qamode == 0) {
         num_to_show = fast_count - slow_count
-        basic.showNumber(num_to_show)
         serial.writeLine("Pace " + num_to_show)
     }
 

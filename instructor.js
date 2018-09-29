@@ -18,7 +18,7 @@ input.onButtonPressed(Button.A, () => {
     } else {
         button_A_state = 0
         radio.sendNumber(100)
-		seriel.writeLine("Poll Results")
+		serial.writeLine("Poll Results")
         serial.writeLine("A votes " + A_count)
         serial.writeLine("B votes " + B_count)
         serial.writeLine("C votes " + C_count)

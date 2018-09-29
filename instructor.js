@@ -9,6 +9,7 @@ let normal_count = 0
 let button_A_state = 0
 let button_B_state = 0
 basic.clearScreen()
+radio.setGroup(1)
 serial.writeLine("Started")
 input.onButtonPressed(Button.A, () => {
     // starting questionaire
@@ -66,4 +67,4 @@ radio.onDataPacketReceived( ({ receivedNumber }) =>  {
     basic.showNumber(num_to_show)
 })
 button_B_state = 0
-radio.setGroup(1)
+

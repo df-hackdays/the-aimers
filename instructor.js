@@ -50,16 +50,16 @@ radio.onDataPacketReceived(({ receivedNumber }) => {
     if (receivedNumber == 9) {
         normal_count += 1
 
-        for(let i = 0; i<5; i++) {
-            led.unplot(0,i)
-            led.unplot(2,i)
-            led.unplot(4,i)
+        for (let i = 0; i < 5; i++) {
+            led.unplot(0, i)
+            led.unplot(2, i)
+            led.unplot(4, i)
         }
 
-        for(let i = 0; i<normal_count; i++) {
-            if(normal_count == 5)
+        for (let i = 0; i < normal_count; i++) {
+            if (normal_count == 5)
                 break;
-            led.plot(2,max-i)
+            led.plot(2, max - i)
         }
     }
     // Slow
@@ -68,20 +68,20 @@ radio.onDataPacketReceived(({ receivedNumber }) => {
         normal_count += -1
 
         for (let i = 0; i < 5; i++) {
-                led.unplot(0,i)
-                led.unplot(4,i)
+            led.unplot(2, i)
+            led.unplot(4, i)
         }
 
         for (let i = 0; i < normal_count; i++) {
             if (normal_count == 5)
                 break;
-            led.plot(4,max-i)
+            led.plot(2, max - i)
         }
 
         for (let i = 0; i < slow_count; i++) {
             if (slow_count == 5)
                 break;
-            led.plot(0,max-i)
+            led.plot(4, max - i)
         }
 
 
@@ -97,20 +97,20 @@ radio.onDataPacketReceived(({ receivedNumber }) => {
         slow_count += -1
 
         for (let i = 0; i < 5; i++) {
-            led.unplot(2,i)
-            led.unplot(0,i)
+            led.unplot(4, i)
+            led.unplot(0, i)
         }
 
         for (let i = 0; i < slow_count; i++) {
             if (slow_count == 5)
                 break;
-            led.plot(0,max-i)
+            led.plot(4, max - i)
         }
 
         for (let i = 0; i < fast_count; i++) {
             if (fast_count == 5)
                 break;
-            led.plot(2,max-i)
+            led.plot(0, max - i)
         }
     }
     // normal
@@ -119,20 +119,20 @@ radio.onDataPacketReceived(({ receivedNumber }) => {
         fast_count += -1
 
         for (let i = 0; i < 5; i++) {
-            led.unplot(i, 4)
-            led.unplot(i, 2)
+            led.unplot(0,i)
+            led.unplot(2,i)
         }
 
         for (let i = 0; i < fast_count; i++) {
             if (fast_count == 5)
                 break;
-            led.plot(2,max-i)
+            led.plot(0, max - i)
         }
 
         for (let i = 0; i < normal_count; i++) {
             if (normal_count == 5)
                 break;
-            led.plot(4,max-i)
+            led.plot(2, max - i)
         }
     }
     if (receivedNumber == 21) {

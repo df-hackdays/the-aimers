@@ -16,15 +16,11 @@ input.onButtonPressed(Button.A, () => {
     if (button_A_state == 0) {
         radio.sendNumber(101)
         button_A_state = 1
+		serial.writeLine("qastarted")
     } else {
         button_A_state = 0
         radio.sendNumber(100)
-		serial.writeLine("Poll Results")
-        serial.writeLine("A votes " + A_count)
-        serial.writeLine("B votes " + B_count)
-        serial.writeLine("C votes " + C_count)
-        serial.writeLine("D votes " + D_count)
-		serial.writeLine("End Poll")
+		serial.writeLine("Results " + "A" + A_count + "B" + B_count + "C" + C_count + "D" + D_count)
         // draw a graph with the A,B,C,D content
         A_count = 0
         B_count = 0

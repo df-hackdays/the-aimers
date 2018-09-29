@@ -1,4 +1,6 @@
+let answer_result = 0
 let send_pace = 0
+let answer_click = 0
 let pace_result = 0
 let qa_mode = 0
 let help_mode = 0
@@ -26,7 +28,26 @@ input.onButtonPressed(Button.A, () => {
         }
     }
     if (qa_mode == 1) {
-    	
+        answer_click += 1
+        if (answer_click > 4) {
+            pace_result = 10
+        }
+        if (answer_click == 1) {
+            basic.showString("A")
+            answer_result = 21
+        }
+        if (answer_click == 2) {
+            basic.showString("B")
+            answer_result = 22
+        }
+        if (answer_click == 3) {
+            basic.showString("C")
+            answer_result = 23
+        }
+        if (answer_click == 4) {
+            basic.showString("D")
+            answer_result = 24
+        }
     }
 })
 input.onButtonPressed(Button.B, () => {
@@ -40,9 +61,14 @@ input.onButtonPressed(Button.B, () => {
             # # # # #
             # # # # #
             `)
+    } else {
+        if (qa_mode == 0 && help_mode == 1) {
+            help_mode = 0
+            basic.showIcon(IconNames.Happy)
+        }
     }
-    if (qa_mode == 0 && help_mode == 1) {
-        help_mode = 0
+    if (qa_mode == 1 && help_mode == 0) {
+        radio.sendNumber(answer_result)
         basic.showIcon(IconNames.Happy)
     }
 })
@@ -53,7 +79,6 @@ radio.onDataPacketReceived( ({ receivedNumber }) =>  {
     if (receivedNumber == 100) {
         qa_mode = 0
         basic.showIcon(IconNames.Happy)
-        pace_click = 0
     }
 })
 radio.setGroup(1)
@@ -64,6 +89,8 @@ radio.sendNumber(9)
 basic.showIcon(IconNames.Happy)
 qa_mode = 0
 help_mode = 0
+answer_click = 0
+answer_result = 0
 basic.forever(() => {
 	
 })

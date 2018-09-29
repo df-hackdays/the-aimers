@@ -8,6 +8,7 @@ let slow_count = 0
 let normal_count = 0
 let button_A_state = 0
 let button_B_state = 0
+basic.clearScreen()
 serial.writeLine("Started")
 input.onButtonPressed(Button.A, () => {
     // starting questionaire
@@ -17,10 +18,11 @@ input.onButtonPressed(Button.A, () => {
     } else {
         button_A_state = 0
         radio.sendNumber(100)
-        serial.writeNumber(A_count)
-        serial.writeNumber(B_count)
-        serial.writeNumber(C_count)
-        serial.writeNumber(D_count)
+		seriel.writeLine("Poll Results")
+        serial.writeLine("A votes " + A_count)
+        serial.writeLine("B votes " + B_count)
+        serial.writeLine("C votes " + C_count)
+        serial.writeLine("D votes " + D_count)
         // draw a graph with the A,B,C,D content
         A_count = 0
         B_count = 0
@@ -62,7 +64,6 @@ radio.onDataPacketReceived( ({ receivedNumber }) =>  {
     }
     num_to_show = fast_count - slow_count
     basic.showNumber(num_to_show)
-    serial.writeNumber(num_to_show)
 })
 button_B_state = 0
 radio.setGroup(1)

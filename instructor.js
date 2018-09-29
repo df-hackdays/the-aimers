@@ -9,13 +9,7 @@ let normal_count = 0
 let button_A_state = 0
 let button_B_state = 0
 radio.setGroup(1)
-
-control.onEvent(0, 0, () => {
-
-    serial.writeLine("Timestamp " , control.eventTimestamp())
-})
-
-control.raiseEvent(0, 0)
+serial.writeLine("started")
 
 input.onButtonPressed(Button.A, () => {
     // starting questionaire
@@ -72,6 +66,6 @@ radio.onDataPacketReceived(({ receivedNumber }) => {
     }
     num_to_show = fast_count - slow_count
     basic.showNumber(num_to_show)
-    serial.writeLine("Pace " , num_to_show)
+    serial.writeLine("Pace " + num_to_show)
 })
 

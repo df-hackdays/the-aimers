@@ -30,7 +30,7 @@ input.onButtonPressed(Button.A, () => {
     if (qa_mode == 1) {
         answer_click += 1
         if (answer_click > 4) {
-            pace_result = 10
+            answer_click = 1
         }
         if (answer_click == 1) {
             basic.showString("A")
@@ -69,12 +69,14 @@ input.onButtonPressed(Button.B, () => {
     }
     if (qa_mode == 1 && help_mode == 0) {
         radio.sendNumber(answer_result)
+        answer_click = 1
         basic.showIcon(IconNames.Happy)
     }
 })
 radio.onDataPacketReceived( ({ receivedNumber }) =>  {
     if (receivedNumber == 101) {
         qa_mode = 1
+        answer_click = 0
     }
     if (receivedNumber == 100) {
         qa_mode = 0

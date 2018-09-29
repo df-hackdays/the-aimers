@@ -18,5 +18,8 @@
   "homepage": "https://github.com/df-hackdays/the-aimers#readme",
   "devDependencies": {
     "serialport": "^7.0.2"
+  },
+  "dependencies": {
+    "mongoose": "^5.3.0"
   }
 }

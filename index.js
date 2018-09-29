@@ -23,9 +23,10 @@ var classKeyData = "";
 var qaKeyData = "";
 var paceData = ""; 
 parser.on('data', (data) => {
-	console.log(data);
+	//console.log(data);
 	if(data.includes("started")){
 		classKeyData = (new Date()).toISOString();
+		console.log("Started");
 	}
 	if(data.includes("Pace") && !data.includes("Results")){
 		paceData = data.substring(data.indexOf(" ")+1);
@@ -48,6 +49,10 @@ parser.on('data', (data) => {
 		var b_count = data.substring(data.indexOf("B")+1, data.indexOf("C"));
 		var c_count = data.substring(data.indexOf("C")+1, data.indexOf("D"));
 		var d_count = data.substring(data.indexOf("D")+1);
+		console.log("A Count: " + a_count);
+		console.log("B Count: " + b_count);
+		console.log("C Count: " + c_count);
+		console.log("D Count: " + d_count);
 		var qaObject = new Qa({ classKey: classKeyData, questionKey: qaKeyData, opta: a_count, optb: b_count, optc: c_count, optd: d_count});
 		qaObject.save(function(error) {
 			console.log("qa object created");

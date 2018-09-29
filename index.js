@@ -23,13 +23,11 @@ var classKeyData = "";
 var paceData = ""; 
 parser.on('data', (data) => {
 	console.log("Sid");
-	if(data.includes("Timestamp")){
-		classKeyData = data.substring(data.indexOf(" ")+1);
-		console.log("thisis times: " + classKeyData);
+	if(data.includes("started")){
+		classKeyData = (new Date()).toISOString();
 	}
 	if(data.includes("Pace")){
 		paceData = data.substring(data.indexOf(" ")+1);
-		console.log("thisis pace: " + paceData);
 		if(paceData != ""){
 			var paceObject = new Pace({ classKey: classKeyData, pace: paceData, paceTime: (new Date()).toISOString() });
 			paceObject.save(function(error) {
@@ -51,6 +49,3 @@ var paceSchema = new mongoose.Schema({
 });
 
 var Pace = mongoose.model('Pace', paceSchema);
-
-
-

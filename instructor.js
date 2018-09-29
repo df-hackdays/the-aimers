@@ -12,7 +12,7 @@ radio.setGroup(1)
 
 control.onEvent(0, 0, () => {
 
-    serial.writeLine(control.eventTimestamp() + "")
+    serial.writeLine("Timestamp " , control.eventTimestamp())
 })
 
 control.raiseEvent(0, 0)
@@ -71,6 +71,6 @@ radio.onDataPacketReceived(({ receivedNumber }) => {
     }
     num_to_show = fast_count - slow_count
     basic.showNumber(num_to_show)
-    serial.writeLine(num_to_show + "")
+    serial.writeLine("Pace " , num_to_show)
 })
 
